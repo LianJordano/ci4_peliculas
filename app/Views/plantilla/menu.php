@@ -17,6 +17,17 @@
             <li><a class="dropdown-item" href="<?= base_url("/pelicula/new") ?>">Crear</a></li>
           </ul>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="<?= base_url("/categoria") ?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categorías
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="<?= base_url("/categoria") ?>">Listar</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="<?= base_url("/categoria/new") ?>">Crear</a></li>
+          </ul>
+        </li>
       </ul>
     
     </div>
