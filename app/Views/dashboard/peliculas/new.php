@@ -1,4 +1,4 @@
-<?php echo $this->extend("plantilla/app") ?>
+<?php echo $this->extend("dashboard/plantilla/app") ?>
 
 <?php echo $this->section("contenido") ?>
 
@@ -9,11 +9,11 @@
     <div class="card mt-5">
         <div class="card-body">
 
-            <form action="<?php echo base_url('pelicula/create'); ?>" method="post">
+            <form action="<?php echo base_url('dashboard/pelicula/create'); ?>" method="post">
 
 
                 <?php
-                    echo view("plantilla/_formPelicula", ["operacion" => "Crear"]);
+                    echo view("dashboard/plantilla/_formPelicula", ["operacion" => "Crear"]);
                 ?>
 
             </form>

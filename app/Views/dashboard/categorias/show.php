@@ -1,4 +1,4 @@
-<?php echo $this->extend("plantilla/app") ?>
+<?php echo $this->extend("dashboard/plantilla/app") ?>
 
 <?php echo $this->section("contenido") ?>
 
@@ -6,9 +6,9 @@
 
 
     <div class="card mt-5">
-        <h2 class="p-3"><?= $pelicula->titulo ?></h2>
+        <h2 class="p-3"><?= $categoria->id ?></h2>
         <div class="card-body">
-            <p><?= $pelicula->descripcion ?></p>
+            <p><?= $categoria->nombre ?></p>
         </div>
     </div>
 

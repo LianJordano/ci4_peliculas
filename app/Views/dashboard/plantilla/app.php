@@ -10,7 +10,7 @@
 
 <body>
 
-    <?php echo $this->include("plantilla/menu") ?>
+    <?php echo $this->include("dashboard/plantilla/menu") ?>
 
 
 

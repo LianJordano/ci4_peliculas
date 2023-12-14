@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Dashboard;
 
+use App\Controllers\BaseController;
 use App\Models\PeliculaModel;
 
 class Pelicula extends BaseController
@@ -21,7 +22,7 @@ class Pelicula extends BaseController
             "titulo" => "Listado de Películas",
             "peliculas" => $peliculas,
         ];
-        return view("peliculas/index",$data);
+        return view("dashboard/peliculas/index",$data);
     }
 
     public function show($id = null)
@@ -33,7 +34,7 @@ class Pelicula extends BaseController
             "pelicula" => $pelicula,
         ];
 
-        return view("peliculas/show",$data);
+        return view("dashboard/peliculas/show",$data);
 
     }
 
@@ -45,7 +46,7 @@ class Pelicula extends BaseController
             "titulo" => "Crear Película",
             "pelicula" =>$pelicula,
         ];
-        return view("peliculas/new",$data);
+        return view("dashboard/peliculas/new",$data);
     }
 
     public function create()
@@ -56,7 +57,8 @@ class Pelicula extends BaseController
             "descripcion" => $this->request->getPost("descripcion"),
         ]);
 
-        return redirect()->to('/pelicula');
+        return redirect()->to('/dashboard/pelicula');
+        return redirect()->route('/dashboard/pelicula');
 
     }
 
@@ -67,7 +69,7 @@ class Pelicula extends BaseController
             "titulo" => "Editar Película",
             "pelicula" => $pelicula,
         ];
-        return view("peliculas/edit",$data);
+        return view("dashboard/peliculas/edit",$data);
     }
 
     public function update($id = null)
@@ -78,14 +80,16 @@ class Pelicula extends BaseController
             "descripcion" => $this->request->getPost("descripcion"),
         ]);
 
-        return redirect()->to('/pelicula');
+        return redirect()->to('/dashboard/pelicula');
     }
 
     public function delete($id = null)
     {
 
         $this->peliculaModel->delete($id);
-        return redirect()->to('/pelicula');
+        return redirect()->to('/dashboard/pelicula');
 
     }
+
+   
 }

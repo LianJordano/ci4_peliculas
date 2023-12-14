@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Dashboard;
 
+use App\Controllers\BaseController;
 use App\Models\CategoriaModel;
-use CodeIgniter\RESTful\ResourceController;
 
-class Categoria extends ResourceController
+class Categoria extends BaseController
 {
 
     private $categoriasModelo;
@@ -23,7 +23,7 @@ class Categoria extends ResourceController
             "titulo" => "Listado de categorías",
             "categorias" => $categorias,
         ];
-        return view("categorias/index", $data);
+        return view("dashboard/categorias/index", $data);
     }
 
     public function show($id = null)
@@ -35,7 +35,7 @@ class Categoria extends ResourceController
             "categoria" => $categoria,
         ];
 
-        return view("categorias/show",$data);
+        return view("dashboard/categorias/show",$data);
 
     }
 
@@ -47,7 +47,7 @@ class Categoria extends ResourceController
             "titulo" => "Crear Categoría",
             "categoria" =>$categoria,
         ];
-        return view("categorias/new",$data);
+        return view("dashboard/categorias/new",$data);
     }
 
     public function create()
@@ -57,7 +57,7 @@ class Categoria extends ResourceController
             "nombre" => $this->request->getPost("nombre"),
         ]);
 
-        return redirect()->to('/categoria');
+        return redirect()->to('/dashboard/categoria');
 
     }
 
@@ -68,7 +68,7 @@ class Categoria extends ResourceController
             "titulo" => "Editar Categorías",
             "categoria" => $categoria,
         ];
-        return view("categorias/edit",$data);
+        return view("dashboard/categorias/edit",$data);
     }
 
     public function update($id = null)
@@ -78,14 +78,14 @@ class Categoria extends ResourceController
             "nombre" => $this->request->getPost("nombre"),
         ]);
 
-        return redirect()->to('/categoria');
+        return redirect()->to('/dashboard/categoria');
     }
 
     public function delete($id = null)
     {
 
         $this->categoriasModelo->delete($id);
-        return redirect()->to('/categoria');
+        return redirect()->to('/dashboard/categoria');
 
     }
 }

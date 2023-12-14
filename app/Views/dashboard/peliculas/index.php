@@ -1,4 +1,4 @@
-<?php echo $this->extend("plantilla/app") ?>
+<?php echo $this->extend("dashboard/plantilla/app") ?>
 
 <?php echo $this->section("contenido") ?>
 
@@ -9,28 +9,30 @@
     <div class="card p-4">
 
         <div class="table-responsive">
-            <a class="btn btn-success m-2" href="<?php echo base_url('categoria/new/'); ?>">Crear Categoría</a>
+            <a class="btn btn-success m-2" href="<?php echo base_url('dashboard/pelicula/new/'); ?>">Crear Película</a>
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
+                        <th>Descripción</th>
                         <th colspan="3">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($categorias as $categoria) : ?>
+                    <?php foreach ($peliculas as $pelicula) : ?>
                         <tr class="">
-                            <td><?= $categoria->id ?></td>
-                            <td><?= $categoria->nombre ?></td>
+                            <td><?= $pelicula->id ?></td>
+                            <td><?= $pelicula->titulo ?></td>
+                            <td><?= $pelicula->descripcion ?></td>
                             <td style="width: 10px;">
-                                <a href="<?php echo base_url('categoria/show/' . $categoria->id); ?>" class="btn btn-info">Mostrar</a>
+                                <a href="<?php echo base_url('dashboard/pelicula/show/' . $pelicula->id); ?>" class="btn btn-info">Mostrar</a>
                             </td>
                             <td style="width: 10px;">
-                                <a href="<?php echo base_url('categoria/edit/' . $categoria->id); ?>" class="btn btn-warning">Editar</a>
+                                <a href="<?php echo base_url('dashboard/pelicula/edit/' . $pelicula->id); ?>" class="btn btn-warning">Editar</a>
                             </td>
                             <td style="width: 10px;">
-                                <form action="<?php echo base_url('categoria/delete/' . $categoria->id); ?>" method="post">
+                                <form action="<?php echo base_url('dashboard/pelicula/delete/' . $pelicula->id); ?>" method="post">
                                     <input type="submit" value="Eliminar" class="btn btn-danger">
                                 </form>
                             </td>
