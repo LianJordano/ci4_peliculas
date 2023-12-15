@@ -2,9 +2,12 @@
 
 <?php echo $this->section("contenido") ?>
 
+
 <div class="container">
 
     <h2 class="p-3"><?= $titulo ?></h2>
+    
+    <?= view("partials/_form-errors") ?>
 
     <div class="card mt-5">
 

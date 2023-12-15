@@ -5,6 +5,8 @@
 <div class="container">
 
     <h1 class="display-5 mt-3"><?= $titulo ?></h1>
+    
+    <?= view("partials/_form-errors") ?>
 
     <div class="card mt-5">
         <div class="card-body">

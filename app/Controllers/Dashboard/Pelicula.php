@@ -17,8 +17,6 @@ class Pelicula extends BaseController
     public function index()
     {   
 
-        session()->set("key", "value");
-
         $peliculas = $this->peliculaModel->findAll();
 
         $data = [
@@ -54,13 +52,20 @@ class Pelicula extends BaseController
 
     public function create()
     {
+        if($this->validate("peliculas")){
+            $insertar = $this->peliculaModel->insert([
+                "titulo" => $this->request->getPost("titulo"),
+                "descripcion" => $this->request->getPost("descripcion"),
+            ]);
+            return redirect()->to('/dashboard/pelicula')->with("mensaje", "Registro añadido exitosamente");
+        }else{
+            session()->setFlashdata([
+                "validation" => $this->validator,
+            ]);
+            return redirect()->back()->withInput();
+        }
         
-        $insertar = $this->peliculaModel->insert([
-            "titulo" => $this->request->getPost("titulo"),
-            "descripcion" => $this->request->getPost("descripcion"),
-        ]);
-
-        return redirect()->to('/dashboard/pelicula')->with("mensaje", "Registro añadido exitosamente");
+     
     }
 
     public function edit($id = null)
@@ -76,12 +81,21 @@ class Pelicula extends BaseController
     public function update($id = null)
     {
 
-        $editar = $this->peliculaModel->update($id,[
-            "titulo" => $this->request->getPost("titulo"),
-            "descripcion" => $this->request->getPost("descripcion"),
-        ]);
+        if($this->validate("peliculas")){
+            $editar = $this->peliculaModel->update($id,[
+                "titulo" => $this->request->getPost("titulo"),
+                "descripcion" => $this->request->getPost("descripcion"),
+            ]);
 
-        return redirect()->to('/dashboard/pelicula')->with("mensaje", "Registro editado exitosamente");;
+            return redirect()->to('/dashboard/pelicula')->with("mensaje", "Registro editado exitosamente");
+
+        }else{
+            session()->setFlashdata([
+                "validation" => $this->validator,
+            ]);
+
+            return redirect()->back()->withInput();
+        }
     }
 
     public function delete($id = null)
