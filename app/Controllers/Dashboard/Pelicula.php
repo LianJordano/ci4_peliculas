@@ -16,6 +16,9 @@ class Pelicula extends BaseController
 
     public function index()
     {   
+
+        session()->set("key", "value");
+
         $peliculas = $this->peliculaModel->findAll();
 
         $data = [
@@ -57,9 +60,7 @@ class Pelicula extends BaseController
             "descripcion" => $this->request->getPost("descripcion"),
         ]);
 
-        return redirect()->to('/dashboard/pelicula');
-        return redirect()->route('/dashboard/pelicula');
-
+        return redirect()->to('/dashboard/pelicula')->with("mensaje", "Registro añadido exitosamente");
     }
 
     public function edit($id = null)
@@ -80,14 +81,14 @@ class Pelicula extends BaseController
             "descripcion" => $this->request->getPost("descripcion"),
         ]);
 
-        return redirect()->to('/dashboard/pelicula');
+        return redirect()->to('/dashboard/pelicula')->with("mensaje", "Registro editado exitosamente");;
     }
 
     public function delete($id = null)
     {
 
         $this->peliculaModel->delete($id);
-        return redirect()->to('/dashboard/pelicula');
+        return redirect()->to('/dashboard/pelicula')->with("mensaje", "Registro eliminado exitosamente");;
 
     }
 

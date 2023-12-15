@@ -10,6 +10,9 @@
 
         <div class="table-responsive">
             <a class="btn btn-success m-2" href="<?php echo base_url('dashboard/pelicula/new/'); ?>">Crear Película</a>
+            
+            <?=view("partials/_session") ?>
+            
             <table class="table table-striped">
                 <thead>
                     <tr>
