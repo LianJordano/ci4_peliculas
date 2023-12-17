@@ -19,6 +19,10 @@ class Pelicula extends BaseController
 
         $peliculas = $this->peliculaModel->findAll();
 
+       /*  $peliculas = $this->peliculaModel->asObject()
+        ->select("id,titulo,descripcion")
+        ->findAll(); */
+
         $data = [
             "titulo" => "Listado de Películas",
             "peliculas" => $peliculas,
