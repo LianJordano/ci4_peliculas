@@ -8,6 +8,11 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'dashboard\pelicula::index');
 
 
+$routes->group('api', function ($routes) {
+    $routes->resource('pelicula', ['controller' => 'Api\Pelicula']);
+    $routes->resource('categoria', ['controller' => 'Api\Categoria']);
+});
+
 $routes->group("dashboard", function($routes){
     $routes->presenter("pelicula",["controller" => "Dashboard\Pelicula"]);
     $routes->presenter("categoria",["controller" => "Dashboard\Categoria"]);
