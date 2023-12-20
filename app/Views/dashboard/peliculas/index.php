@@ -19,7 +19,8 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th colspan="3">Acciones</th>
+                        <th>Categoría</th>
+                        <th colspan="4">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,11 +29,15 @@
                             <td><?= $pelicula->id ?></td>
                             <td><?= $pelicula->titulo ?></td>
                             <td><?= $pelicula->descripcion ?></td>
+                            <td><?= $pelicula->categoria ?></td>
                             <td style="width: 10px;">
                                 <a href="<?php echo base_url('dashboard/pelicula/show/' . $pelicula->id); ?>" class="btn btn-info">Mostrar</a>
                             </td>
                             <td style="width: 10px;">
                                 <a href="<?php echo base_url('dashboard/pelicula/edit/' . $pelicula->id); ?>" class="btn btn-warning">Editar</a>
+                            </td>
+                            <td style="width: 10px;">
+                                <a href="<?php echo base_url('dashboard/pelicula/etiquetas/' . $pelicula->id); ?>" class="btn btn-secondary">Etiquetas</a>
                             </td>
                             <td style="width: 10px;">
                                 <form action="<?php echo base_url('dashboard/pelicula/delete/' . $pelicula->id); ?>" method="post">

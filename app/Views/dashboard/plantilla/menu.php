@@ -28,6 +28,17 @@
             <li><a class="dropdown-item" href="<?= base_url("/dashboard/categoria/new") ?>">Crear</a></li>
           </ul>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="<?= base_url("/dashboard/categoria") ?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Etiquetas
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="<?= base_url("/dashboard/etiqueta") ?>">Listar</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="<?= base_url("/dashboard/etiqueta/new") ?>">Crear</a></li>
+          </ul>
+        </li>
       </ul>
     
     </div>

@@ -49,7 +49,8 @@ class Validation extends BaseConfig
 
     public $peliculas = [
         "titulo" => "required|min_length[3]|max_length[255]",
-        "descripcion" => "required|min_length[3]|max_length[2000]"
+        "descripcion" => "required|min_length[3]|max_length[2000]",
+        "categoria_id" => "required|is_natural"
     ];
 
     public $usuarios = [
@@ -58,4 +59,8 @@ class Validation extends BaseConfig
         "contrasena" => "required|min_length[3]|max_length[100]"
     ];
 
+    public $etiquetas = [
+        "titulo" => "required|min_length[3]|max_length[255]",
+        "categoria_id" => "required|is_natural"
+    ];
 }

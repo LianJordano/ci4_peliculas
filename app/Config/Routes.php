@@ -14,8 +14,17 @@ $routes->group('api', function ($routes) {
 });
 
 $routes->group("dashboard", function($routes){
+    
+    $routes->get('pelicula/etiquetas/(:num)', 'Dashboard\pelicula::etiquetas/$1');
+    $routes->post('pelicula/etiquetas_post/(:num)', 'Dashboard\pelicula::etiquetas_post/$1');
+    $routes->post('pelicula/(:num)/etiqueta/(:num)/delete', 'Dashboard\pelicula::etiqueta_delete/$1/$2');
+    //$routes->post('pelicula/(:num)/etiqueta/(:num)/delete', 'Dashboard\Pelicula\etiqueta_delete/$1/$2', ["as" => "pelicula.etiqueta_delete"]);
+    
     $routes->presenter("pelicula",["controller" => "Dashboard\Pelicula"]);
     $routes->presenter("categoria",["controller" => "Dashboard\Categoria"]);
+    $routes->presenter("etiqueta",["controller" => "Dashboard\Etiqueta"]);
+
+
 });
 
 $routes->get("traficar", "web\usuario::traficarUsuario");

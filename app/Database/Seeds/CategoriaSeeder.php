@@ -20,7 +20,7 @@ class CategoriaSeeder extends Seeder
             ]);
         } */
 
-        $categoriaModel->where("id <> 0")->truncate();
+        //$categoriaModel->where("id <> 0")->truncate();
         for ($i = 0; $i < 20; $i++) {
 
             $categoriaModel->insert([

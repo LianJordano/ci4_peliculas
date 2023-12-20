@@ -2,28 +2,28 @@
 
 namespace App\Database\Seeds;
 
+use App\Models\EtiquetaModel;
 use App\Models\CategoriaModel;
-use App\Models\PeliculaModel;
 use CodeIgniter\Database\Seeder;
 
-class PeliculaSeeder extends Seeder
+class EtiquetaSeeder extends Seeder
 {
     public function run()
     {
-        $peliculaModel = new PeliculaModel();
+        $etiquetaModel = new EtiquetaModel();
         $categoriaModel = new CategoriaModel();
         
-        $peliculaModel->where("id <> 0")->truncate();
-
+        
         $categorias = $categoriaModel->limit(7)->findAll();
+        
+        //$etiquetaModel->where("id <> 0")->truncate();
 
         foreach ($categorias as $categoria) {
             
             for ($i=0; $i <10 ; $i++) { 
             
-                $peliculaModel->insert([
-                    "titulo" => "Pelicula $i",
-                    "descripcion" => "Descripción pelicula $i",
+                $etiquetaModel->insert([
+                    "titulo" => "Tag $i $categoria->nombre",
                     "categoria_id" => $categoria->id
                 ]);
     
