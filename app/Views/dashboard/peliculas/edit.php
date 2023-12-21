@@ -13,7 +13,7 @@
 
         <div class="card-body">
 
-            <form action="<?php echo base_url('dashboard/pelicula/update/' . $pelicula->id); ?>" method="post">
+            <form enctype="multipart/form-data" action="<?php echo base_url('dashboard/pelicula/update/' . $pelicula->id); ?>" method="post">
 
                 <?php 
                    echo view("dashboard/plantilla/_formPelicula",["operacion" => "Editar"]);

@@ -108,6 +108,8 @@ class Pelicula extends BaseController
                 "categoria_id" => $this->request->getPost("categoria_id"),
             ]);
 
+            $this->asignarImagen($id);
+
             return redirect()->to('/dashboard/pelicula')->with("mensaje", "Registro editado exitosamente");
         } else {
             session()->setFlashdata([
@@ -176,13 +178,102 @@ class Pelicula extends BaseController
     {
         $peliculaEtiqueta = new PeliculaEtiquetaModel();
         $peliculaEtiqueta
-        ->where("etiqueta_id", $etiquetaId)
-        ->where("pelicula_id", $peliculaId)
-        ->delete();
+            ->where("etiqueta_id", $etiquetaId)
+            ->where("pelicula_id", $peliculaId)
+            ->delete();
 
         echo '{"mensaje":"Eliminado"}';
 
-      /*   return redirect()->back()->with("mensaje", "Etiqueta eliminada"); */
+        /*   return redirect()->back()->with("mensaje", "Etiqueta eliminada"); */
+    }
+
+    private function asignarImagen($peliculaId)
+    {
+
+        $imageFile = $this->request->getFile("imagen");
+
+        if ($imageFile) {
+            if ($imageFile->isValid()) {
+
+                $validated = $this->validate([
+                    "uploaded[imagen]",
+                    "mime_in[imagen,image/jpg,image/gif,image/png,image/jpeg]",
+                    "max_size[imagen,4096]"
+                ]);
+
+                if ($validated) {
+                    $imageNombre = $imageFile->getRandomName();
+                    //$imageNombre = $imageFile->getName();
+                    $ext = $imageFile->guessExtension();
+
+                    //$imageFile->move(WRITEPATH . "uploads/peliculas", $imageNombre);
+                    $imageFile->move("../public/uploads/peliculas", $imageNombre);
+
+                    $imagenModel = new ImagenModel();
+                    $imagenId = $imagenModel->insert([
+                        "imagen" => $imageNombre,
+                        "extension" => $ext,
+                        "data" => "Pendiente",
+                    ]);
+
+                    $peliculaImagenModel = new PeliculaImagenModel();
+                    $peliculaImagenModel->insert([
+                        "imagen_id" => $imagenId,
+                        "pelicula_id" => $peliculaId,
+                    ]);
+                }
+
+                return $this->validator->listErrors();
+            }
+        }
+    }
+
+    public function borrarImagen($imagenId)
+    {
+        // Asegúrate de importar los modelos si no se han importado previamente
+        $imagenModel = new ImagenModel();
+        $peliculaImagenModel = new PeliculaImagenModel();
+        
+        // Buscar la imagen en la base de datos
+        $imagen = $imagenModel->find($imagenId);
+    
+        if (!$imagen) {
+            return "No existe la imagen";
+        }
+    
+        // Obtener la ruta completa del archivo
+        $imagenRuta = FCPATH . "uploads/peliculas/" . $imagen->imagen;
+    
+        // Verificar si el archivo existe antes de intentar eliminarlo
+        if (file_exists($imagenRuta)) {
+            // Intentar eliminar el archivo
+            if (unlink($imagenRuta)) {
+                // Eliminar el registro asociado en la tabla de relación
+                $peliculaImagenModel->where("imagen_id", $imagenId)->delete();
+    
+                // Eliminar la imagen de la tabla de imágenes
+                $imagenModel->delete($imagenId);
+    
+                return redirect()->back()->with("mensaje", "Imagen eliminada correctamente");
+            } else {
+                return "Hubo un problema al eliminar el archivo";
+            }
+        } else {
+            return "El archivo no existe en la ruta especificada";
+        }
+    }
+
+
+    public function descargarImagen($imagenId){
+        $imagenModel = new ImagenModel();
+        $imagen = $imagenModel->find($imagenId);
+
+        if (!$imagen) {
+            return "No existe la imagen";
+        }
+        $imagenRuta = FCPATH . "uploads/peliculas/" . $imagen->imagen;
+
+        return $this->response->download($imagenRuta, null);
 
     }
 
@@ -197,12 +288,12 @@ class Pelicula extends BaseController
         ]);
     }
 
-    private function asignarImagen()
+    /* private function asignarImagen()
     {
         $peliculaImagenModel = new PeliculaImagenModel();
         $peliculaImagenModel->insert([
             "imagen_id" => 2,
             "pelicula_id" => 3,
         ]);
-    }
+    } */
 }

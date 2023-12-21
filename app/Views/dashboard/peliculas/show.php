@@ -13,11 +13,26 @@
     </div>
 
     <h2>Imágenes</h2>
-    <ul>
+
+
+    <div class="row">
         <?php foreach ($imagenes as $imagen) : ?>
-            <li><?= $imagen->imagen ?></li>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <img style="width: 100%; height: 400px;" src="<?= base_url('uploads/peliculas/') ?><?= $imagen->imagen ?>">
+                
+                <div style="display: flex; align-items: center; justify-content:center;gap:10px;">
+                    <form action="<?= base_url("dashboard/pelicula/imagen_delete/$pelicula->id/$imagen->id") ?>" method="post">
+                        <button class="btn btn-danger mt-2">Eliminar</button>
+                    </form>
+                    <form action="<?= base_url("dashboard/pelicula/imagen_descargar/$imagen->id") ?>" method="post">
+                        <button class="btn btn-success mt-2">Descargar</button>
+                    </form>
+                </div>
+
+            </div>
         <?php endforeach; ?>
-    </ul>
+    </div>
+
 
 
     <h2>Etiquetas</h2>
@@ -38,6 +53,7 @@
     <?php endforeach; ?>
 
 </div>
+
 
 <script>
     let etiquetas = document.querySelectorAll(".deleteEtiqueta");

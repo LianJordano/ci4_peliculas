@@ -18,6 +18,8 @@ $routes->group("dashboard", function($routes){
     $routes->get('pelicula/etiquetas/(:num)', 'Dashboard\pelicula::etiquetas/$1');
     $routes->post('pelicula/etiquetas_post/(:num)', 'Dashboard\pelicula::etiquetas_post/$1');
     $routes->post('pelicula/(:num)/etiqueta/(:num)/delete', 'Dashboard\pelicula::etiqueta_delete/$1/$2');
+    $routes->post('pelicula/imagen_delete/(:num)', 'Dashboard\pelicula::borrarImagen/$1');
+    $routes->post('pelicula/imagen_descargar/(:num)', 'Dashboard\pelicula::descargarImagen/$1');
     //$routes->post('pelicula/(:num)/etiqueta/(:num)/delete', 'Dashboard\Pelicula\etiqueta_delete/$1/$2', ["as" => "pelicula.etiqueta_delete"]);
     
     $routes->presenter("pelicula",["controller" => "Dashboard\Pelicula"]);
