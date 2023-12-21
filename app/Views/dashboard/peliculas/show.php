@@ -21,7 +21,7 @@
                 <img style="width: 100%; height: 400px;" src="<?= base_url('uploads/peliculas/') ?><?= $imagen->imagen ?>">
                 
                 <div style="display: flex; align-items: center; justify-content:center;gap:10px;">
-                    <form action="<?= base_url("dashboard/pelicula/imagen_delete/$pelicula->id/$imagen->id") ?>" method="post">
+                    <form action="<?= base_url("dashboard/pelicula/imagen_delete/$imagen->id") ?>" method="post">
                         <button class="btn btn-danger mt-2">Eliminar</button>
                     </form>
                     <form action="<?= base_url("dashboard/pelicula/imagen_descargar/$imagen->id") ?>" method="post">
