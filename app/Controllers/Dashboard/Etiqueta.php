@@ -22,10 +22,11 @@ class Etiqueta extends BaseController
         $etiquetas = $this->etiquetaModel->asObject()
             ->select("etiquetas.id,titulo,categorias.nombre as categoria")
             ->join("categorias", "categorias.id = etiquetas.categoria_id")
-            ->findAll();
+            ->paginate(7);
         $data = [
             "titulo" => "Listado de etiquetas",
             "etiquetas" => $etiquetas,
+            "pager" => $this->etiquetaModel->pager
         ];
         return view("dashboard/etiquetas/index", $data);
     }

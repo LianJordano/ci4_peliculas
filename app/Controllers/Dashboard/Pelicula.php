@@ -21,7 +21,8 @@ class Pelicula extends BaseController
 
     public function index()
     {
-
+        //helper(["cookie", "date"]);
+        //echo now();
         //$peliculas = $this->peliculaModel->findAll();
 
         /* $this->generarImagen();
@@ -30,11 +31,13 @@ class Pelicula extends BaseController
         $peliculas = $this->peliculaModel->asObject()
             ->select("peliculas.id,titulo,descripcion,categorias.nombre as categoria")
             ->join("categorias", "categorias.id = peliculas.categoria_id")
-            ->findAll();
+            ->paginate(7);
 
         $data = [
             "titulo" => "Listado de Películas",
             "peliculas" => $peliculas,
+            "pager" => $this->peliculaModel->pager
+
         ];
         return view("dashboard/peliculas/index", $data);
     }
@@ -190,6 +193,8 @@ class Pelicula extends BaseController
     private function asignarImagen($peliculaId)
     {
 
+        helper("filesystem");
+
         $imageFile = $this->request->getFile("imagen");
 
         if ($imageFile) {
@@ -213,7 +218,7 @@ class Pelicula extends BaseController
                     $imagenId = $imagenModel->insert([
                         "imagen" => $imageNombre,
                         "extension" => $ext,
-                        "data" => "Pendiente",
+                        "data" => json_encode(get_file_info("../public/uploads/peliculas/". $imageNombre)),
                     ]);
 
                     $peliculaImagenModel = new PeliculaImagenModel();
