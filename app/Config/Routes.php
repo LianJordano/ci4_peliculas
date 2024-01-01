@@ -26,6 +26,10 @@ $routes->group("dashboard", function($routes){
     $routes->presenter("categoria",["controller" => "Dashboard\Categoria"]);
     $routes->presenter("etiqueta",["controller" => "Dashboard\Etiqueta"]);
 
+});
+
+$routes->group("blog", function($routes){
+    $routes->presenter("pelicula",["controller" => "blog\Pelicula", "only" => ["index","show"]]);
 
 });
 
